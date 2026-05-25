@@ -2,116 +2,473 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ガジェット・テック | おすすめ商品</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05080F">
+<title>ガジェット厳選ランキング | おすすめ商品</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#0C1020;color:#FFFFFF;font-family:-apple-system,'Hiragino Sans',sans-serif}
-header{background:#111827;padding:20px 16px;text-align:center;border-bottom:3px solid #00CCE6}
-header h1{font-size:20px;font-weight:700}
-.sub{font-size:12px;opacity:.65;margin-top:5px}
-.accent{color:#00CCE6}
-main{padding:12px;max-width:520px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{display:flex;flex-direction:column;background:#1A2035;border:1px solid #2A3555;border-radius:14px;overflow:hidden;text-decoration:none;color:#FFFFFF;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
-.card:active{opacity:.6}
-.card img,.no-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#2A3555}
-.info{flex:1;display:flex;flex-direction:column;padding:9px 10px 10px}
-.rank{font-size:10px;color:#00CCE6;font-weight:700;margin-bottom:3px}
-.name{font-size:12px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-.price{font-size:13px;font-weight:700;color:#00CCE6;margin-top:6px}
-.stars{font-size:10px;opacity:.65;margin-top:2px}
-.btn{display:block;margin-top:8px;background:#00CCE6;color:#0C1020;font-size:11px;font-weight:700;padding:6px 0;border-radius:20px;text-align:center}
-footer{text-align:center;font-size:11px;opacity:.4;padding:28px 16px 40px}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #05080F;
+  --surface:     #0B1525;
+  --surface-2:   #0F1D35;
+  --text:        #D0E8FF;
+  --text-sub:    #3A5A7A;
+  --accent:      #00D4E8;
+  --accent-glow: rgba(0,212,232,0.22);
+  --border:      rgba(0,212,232,0.13);
+  --shadow:      0 2px 24px rgba(0,0,0,0.6);
+  --shadow-h:    0 0 48px rgba(0,212,232,0.14), 0 6px 28px rgba(0,0,0,0.6);
+  --radius:      8px;
+  --fn-disp:     'Chakra Petch', 'Noto Sans JP', monospace;
+  --fn-body:     'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0,212,232,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,232,0.025) 1px, transparent 1px),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,80,140,0.12) 0%, transparent 60%);
+  background-size: 36px 36px, 36px 36px, 100% 100%;
+  color: var(--text);
+  font-family: var(--fn-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.site-header {
+  background: linear-gradient(180deg, #0C1A30 0%, #05080F 100%);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 52px 24px 44px;
+  position: relative;
+  overflow: hidden;
+}
+/* Scanline overlay */
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.06) 3px,
+    rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+}
+/* Top glow line */
+.site-header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 320px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 40px 8px rgba(0,212,232,0.18);
+}
+
+.header-inner { position: relative; z-index: 1; }
+.header-eyebrow {
+  font-family: var(--fn-disp);
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  color: var(--accent);
+  opacity: 0.65;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.header-eyebrow::after {
+  content: '_';
+  animation: blink 1.1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.header-title {
+  font-family: var(--fn-disp);
+  font-size: clamp(26px, 5.5vw, 50px);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--text);
+  text-shadow: 0 0 32px rgba(0,212,232,0.28);
+  text-transform: uppercase;
+}
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px auto 16px;
+}
+.header-divider span {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+  opacity: 0.35;
+}
+.header-divider span:last-child {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.header-divider em {
+  font-family: var(--fn-disp);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+.header-meta {
+  font-family: var(--fn-disp);
+  font-size: 11px;
+  color: var(--text-sub);
+  letter-spacing: 0.18em;
+}
+.header-count {
+  font-family: var(--fn-disp);
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.pr-badge {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--fn-disp);
+  font-size: 9px;
+  color: var(--text-sub);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px 12px 36px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 28px 20px 44px;
+  }
+}
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    padding: 36px 30px 52px;
+  }
+}
+
+/* ── Featured (#1) ── */
+.card.featured { grid-column: 1 / -1; }
+@media (min-width: 600px) {
+  .card.featured { grid-column: span 2; }
+  .card.featured .card-link { flex-direction: row; }
+  .card.featured .card-img-wrap { width: 43%; flex-shrink: 0; }
+  .card.featured .card-img-wrap img,
+  .card.featured .card-img-wrap .no-img { aspect-ratio: 4/3; }
+  .card.featured .card-body { padding: 26px 28px 22px; justify-content: center; }
+  .card.featured .card-name { font-size: 14px; -webkit-line-clamp: 3; }
+  .card.featured .card-price { font-size: 36px; }
+  .card.featured .card-btn { max-width: 210px; }
+}
+
+/* ── Card ── */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  animation: slideIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  transition: transform 0.22s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.22s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-h);
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.card-img-wrap img, .no-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--surface-2);
+  filter: brightness(0.88) saturate(0.8);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease;
+}
+.card:hover .card-img-wrap img {
+  transform: scale(1.06);
+  filter: brightness(1.02) saturate(1);
+}
+.no-img { background: linear-gradient(135deg, #0D1E38 0%, #071528 100%); }
+
+.badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: var(--accent);
+  color: #050810;
+  font-family: var(--fn-disp);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.card.featured .badge {
+  background: linear-gradient(135deg, var(--accent) 0%, #0088FF 100%);
+  font-size: 11px;
+  padding: 4px 12px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 11px 13px 13px;
+}
+.card-stars { display: flex; align-items: center; gap: 2px; }
+.star { font-size: 11px; line-height: 1; }
+.star.filled { color: #FFD700; }
+.star.empty  { color: rgba(255,255,255,0.08); }
+.rating-num {
+  font-family: var(--fn-disp);
+  font-size: 12px;
+  color: var(--accent);
+  margin-left: 5px;
+  font-weight: 600;
+}
+.review-cnt { font-size: 9px; color: var(--text-sub); margin-left: 2px; }
+
+.card-name {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+  color: var(--text);
+  opacity: 0.88;
+  margin-top: 6px;
+}
+
+.card-price {
+  font-family: var(--fn-disp);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(0,212,232,0.28);
+}
+
+.card-btn {
+  display: block;
+  margin-top: 11px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--fn-disp);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding: 7px 0;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+.card:hover .card-btn {
+  background: var(--accent);
+  color: #050810;
+  box-shadow: 0 0 16px rgba(0,212,232,0.3);
+}
+
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 24px 16px 52px;
+  font-family: var(--fn-disp);
+  font-size: 9px;
+  color: var(--text-sub);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--border);
+  opacity: 0.5;
+}
+
 </style>
 </head>
 <body>
-<header>
-  <h1>ガジェット・テック</h1>
-  <p class="sub">今日のおすすめ <span class="accent">8選</span> &nbsp;|&nbsp; 2026年05月25日更新</p>
-  <p class="sub">本ページはPRを含みます（楽天アフィリエイト）</p>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-eyebrow">GADGET.LAB &gt; TERMINAL</p>
+    <h1 class="header-title">ガジェット厳選ランキング</h1>
+    <div class="header-divider">
+      <span></span><em>RANKED PICKS</em><span></span>
+    </div>
+    <p class="header-meta"><span class="header-count">8</span>選 &nbsp;·&nbsp; 2026年05月25日更新</p>
+    <span class="pr-badge">PR &nbsp;/&nbsp; 楽天アフィリエイト</span>
+  </div>
 </header>
-<main>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00rr09n.8uhxwc2c.g00rr09n.8uhxxb91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa3331%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/anker/cabinet/listing/tmb/a3331/a3331_normalv3.jpg?_ex=128x128" alt="【期間限定セール実施中 5/27まで】Soundcore C40i（Blueto" loading="lazy">
-    <div class="info">
-      <p class="rank">#1</p>
-      <p class="name">【期間限定セール実施中 5/27まで】Soundcore C40i（Blueto</p>
-      <p class="price">¥7,490</p>
-      <p class="stars">★4.44</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00r8mvn.8uhxwc14.g00r8mvn.8uhxx641/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-kojima%2F4978877516930%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/r-kojima/cabinet/n0000001462/4978877516930_1.jpg?_ex=128x128" alt="コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S" loading="lazy">
-    <div class="info">
-      <p class="rank">#2</p>
-      <p class="name">コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S</p>
-      <p class="price">¥17,380</p>
-      <p class="stars">★4.5</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00r8mvn.8uhxwc14.g00r8mvn.8uhxx641/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-kojima%2F4978877516923%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/r-kojima/cabinet/n0000001462/4978877516923_1.jpg?_ex=128x128" alt="コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S" loading="lazy">
-    <div class="info">
-      <p class="rank">#3</p>
-      <p class="name">コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S</p>
-      <p class="price">¥17,380</p>
-      <p class="stars">★4.0</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00rr09n.8uhxwc2c.g00rr09n.8uhxxb91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa3994%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/anker/cabinet/images/soundcore/a3994_normal.jpg?_ex=128x128" alt="【期間限定セール実施中 5/27まで】Anker Soundcore K20i（" loading="lazy">
-    <div class="info">
-      <p class="rank">#4</p>
-      <p class="name">【期間限定セール実施中 5/27まで】Anker Soundcore K20i（</p>
-      <p class="price">¥3,990</p>
-      <p class="stars">★4.41</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00u6ntn.8uhxw266.g00u6ntn.8uhxx8c6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhuawei-official%2F55037246copy%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/huawei-official/cabinet/12934521/12934523/fc2-idpurple.jpg?_ex=128x128" alt="【父の日100円OFFクーポン＆10%OFF&amp;特典付き】楽天1位 ワイヤレスイヤ" loading="lazy">
-    <div class="info">
-      <p class="rank">#5</p>
-      <p class="name">【父の日100円OFFクーポン＆10%OFF&amp;特典付き】楽天1位 ワイヤレスイヤ</p>
-      <p class="price">¥24,800</p>
-      <p class="stars">★4.68</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00rtgfn.8uhxwe21.g00rtgfn.8uhxxee2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-shop1one%2F4580652113441%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/d-shop1one/cabinet/item/4580652113441.jpg?_ex=128x128" alt="◆最大3000円CP＋P3倍！！5/25◆東芝 レグザ テレビ 24インチ 液晶" loading="lazy">
-    <div class="info">
-      <p class="rank">#6</p>
-      <p class="name">◆最大3000円CP＋P3倍！！5/25◆東芝 レグザ テレビ 24インチ 液晶</p>
-      <p class="price">¥26,783</p>
-      <p class="stars">★4.65</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00ulw0n.8uhxw677.g00ulw0n.8uhxx882/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftandc2%2Fpj530%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/tandc2/cabinet/pj530/pj530_n1.jpg?_ex=128x128" alt="【ランキング1位！Android TV搭載・270°回転】プロジェクター 家庭用" loading="lazy">
-    <div class="info">
-      <p class="rank">#7</p>
-      <p class="name">【ランキング1位！Android TV搭載・270°回転】プロジェクター 家庭用</p>
-      <p class="price">¥9,960</p>
-      <p class="stars">★4.57</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00u54tn.8uhxwe7b.g00u54tn.8uhxxb95/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarshall-official%2F7340055399449%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/marshall-official/cabinet/portable_speakers/emberton3/imgrc0119011544.jpg?_ex=128x128" alt="Marshall 公式ストア EMBERTON III Bluetoothスピー" loading="lazy">
-    <div class="info">
-      <p class="rank">#8</p>
-      <p class="name">Marshall 公式ストア EMBERTON III Bluetoothスピー</p>
-      <p class="price">¥28,980</p>
-      <p class="stars">★4.89</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
+
+<main class="grid">
+  <article class="card featured" style="animation-delay:0.00s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00rr09n.8uhxwc2c.g00rr09n.8uhxxb91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa3331%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/anker/cabinet/listing/tmb/a3331/a3331_normalv3.jpg?_ex=128x128" alt="【期間限定セール実施中 5/27まで】Soundcore C40i（Blueto" loading="lazy">
+        <span class="badge">No.1</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.4</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【期間限定セール実施中 5/27まで】Soundcore C40i（Blueto</h2>
+        <div class="card-price">¥7,490</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.06s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00r8mvn.8uhxwc14.g00r8mvn.8uhxx641/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-kojima%2F4978877516930%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/r-kojima/cabinet/n0000001462/4978877516930_1.jpg?_ex=128x128" alt="コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S" loading="lazy">
+        <span class="badge">#2</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.5</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S</h2>
+        <div class="card-price">¥17,380</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.12s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00r8mvn.8uhxwc14.g00r8mvn.8uhxx641/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-kojima%2F4978877516923%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/r-kojima/cabinet/n0000001462/4978877516923_1.jpg?_ex=128x128" alt="コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S" loading="lazy">
+        <span class="badge">#3</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.0</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">コダック　KODAK PIXPRO コンパクトデジタルカメラ CLASSIC S</h2>
+        <div class="card-price">¥17,380</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.18s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00rr09n.8uhxwc2c.g00rr09n.8uhxxb91/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa3994%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/anker/cabinet/images/soundcore/a3994_normal.jpg?_ex=128x128" alt="【期間限定セール実施中 5/27まで】Anker Soundcore K20i（" loading="lazy">
+        <span class="badge">#4</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.4</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【期間限定セール実施中 5/27まで】Anker Soundcore K20i（</h2>
+        <div class="card-price">¥3,990</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.24s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00u6ntn.8uhxw266.g00u6ntn.8uhxx8c6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhuawei-official%2F55037246copy%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/huawei-official/cabinet/12934521/12934523/fc2-idpurple.jpg?_ex=128x128" alt="【父の日100円OFFクーポン＆10%OFF&amp;特典付き】楽天1位 ワイヤレスイヤ" loading="lazy">
+        <span class="badge">#5</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.7</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【父の日100円OFFクーポン＆10%OFF&amp;特典付き】楽天1位 ワイヤレスイヤ</h2>
+        <div class="card-price">¥24,800</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.30s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00rtgfn.8uhxwe21.g00rtgfn.8uhxxee2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-shop1one%2F4580652113441%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/d-shop1one/cabinet/item/4580652113441.jpg?_ex=128x128" alt="◆最大3000円CP＋P3倍！！5/25◆東芝 レグザ テレビ 24インチ 液晶" loading="lazy">
+        <span class="badge">#6</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.7</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">◆最大3000円CP＋P3倍！！5/25◆東芝 レグザ テレビ 24インチ 液晶</h2>
+        <div class="card-price">¥26,783</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.36s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00ulw0n.8uhxw677.g00ulw0n.8uhxx882/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftandc2%2Fpj530%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/tandc2/cabinet/pj530/pj530_n1.jpg?_ex=128x128" alt="【ランキング1位！Android TV搭載・270°回転】プロジェクター 家庭用" loading="lazy">
+        <span class="badge">#7</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.6</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【ランキング1位！Android TV搭載・270°回転】プロジェクター 家庭用</h2>
+        <div class="card-price">¥9,960</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.42s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00u54tn.8uhxwe7b.g00u54tn.8uhxxb95/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarshall-official%2F7340055399449%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/marshall-official/cabinet/portable_speakers/emberton3/imgrc0119011544.jpg?_ex=128x128" alt="Marshall 公式ストア EMBERTON III Bluetoothスピー" loading="lazy">
+        <span class="badge">#8</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.9</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">Marshall 公式ストア EMBERTON III Bluetoothスピー</h2>
+        <div class="card-price">¥28,980</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
 </main>
-<footer>楽天アフィリエイト | PR含む</footer>
+
+<footer class="site-footer">
+  <p>© gadget.lab.picks &nbsp;—&nbsp; 楽天アフィリエイト参加中 &nbsp;/&nbsp; 本ページはPRを含みます</p>
+</footer>
 </body>
 </html>

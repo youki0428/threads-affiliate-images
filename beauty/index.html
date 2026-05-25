@@ -2,116 +2,443 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>美容・スキンケア | おすすめ商品</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F7F2EC">
+<title>スキンケア厳選コレクション | おすすめ商品</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#FAFAFA;color:#333333;font-family:-apple-system,'Hiragino Sans',sans-serif}
-header{background:#FFF0EE;padding:20px 16px;text-align:center;border-bottom:3px solid #E8A4B8}
-header h1{font-size:20px;font-weight:700}
-.sub{font-size:12px;opacity:.65;margin-top:5px}
-.accent{color:#E8A4B8}
-main{padding:12px;max-width:520px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #F0D8D0;border-radius:14px;overflow:hidden;text-decoration:none;color:#333333;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
-.card:active{opacity:.6}
-.card img,.no-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#F0D8D0}
-.info{flex:1;display:flex;flex-direction:column;padding:9px 10px 10px}
-.rank{font-size:10px;color:#E8A4B8;font-weight:700;margin-bottom:3px}
-.name{font-size:12px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-.price{font-size:13px;font-weight:700;color:#C0617A;margin-top:6px}
-.stars{font-size:10px;opacity:.65;margin-top:2px}
-.btn{display:block;margin-top:8px;background:#E8A4B8;color:#FFFFFF;font-size:11px;font-weight:700;padding:6px 0;border-radius:20px;text-align:center}
-footer{text-align:center;font-size:11px;opacity:.4;padding:28px 16px 40px}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #F7F2EC;
+  --surface:    #FFFFFF;
+  --text:       #1E1517;
+  --text-sub:   #8A6A72;
+  --accent:     #C0617A;
+  --gold:       #BFA07A;
+  --border:     rgba(192,97,122,0.14);
+  --shadow:     0 2px 18px rgba(60,20,30,0.07);
+  --shadow-h:   0 12px 44px rgba(192,97,122,0.18);
+  --radius:     18px;
+  --fn-disp:    'Cormorant Garamond', 'Noto Serif JP', Georgia, serif;
+  --fn-body:    'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(192,97,122,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 80% 100%, rgba(191,160,122,0.06) 0%, transparent 60%);
+  color: var(--text);
+  font-family: var(--fn-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.site-header {
+  background: linear-gradient(155deg, #FFF8F3 0%, #FEF0EC 50%, #FAE8EA 100%);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 52px 24px 44px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 110%,
+    rgba(192,97,122,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 280px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192,97,122,0.5), transparent);
+}
+
+.header-inner { position: relative; }
+.header-eyebrow {
+  display: inline-block;
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  opacity: 0.75;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.header-title {
+  font-family: var(--fn-disp);
+  font-size: clamp(30px, 6.5vw, 56px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px auto 16px;
+}
+.header-divider span {
+  width: 48px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+  opacity: 0.4;
+}
+.header-divider span:last-child {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.header-divider em {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+.header-meta {
+  font-size: 12px;
+  color: var(--text-sub);
+  letter-spacing: 0.03em;
+}
+.header-count {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+}
+.pr-badge {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  color: var(--text-sub);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 24px 14px 36px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 32px 22px 44px;
+  }
+}
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    padding: 40px 32px 56px;
+  }
+}
+
+/* ── Featured (#1) ── */
+.card.featured { grid-column: 1 / -1; }
+@media (min-width: 600px) {
+  .card.featured { grid-column: span 2; }
+  .card.featured .card-link { flex-direction: row; }
+  .card.featured .card-img-wrap { width: 45%; flex-shrink: 0; }
+  .card.featured .card-img-wrap img,
+  .card.featured .card-img-wrap .no-img { aspect-ratio: 4/3; }
+  .card.featured .card-body { padding: 30px 30px 26px; justify-content: center; }
+  .card.featured .card-name { font-size: 16px; -webkit-line-clamp: 3; margin-top: 6px; }
+  .card.featured .card-price { font-size: 32px; }
+  .card.featured .card-btn { max-width: 220px; padding: 10px 0; font-size: 12px; }
+}
+
+/* ── Card ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.28s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-h);
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #F5ECE8;
+}
+.card-img-wrap img, .no-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #F0E8E4;
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.card:hover .card-img-wrap img { transform: scale(1.07); }
+.no-img { background: linear-gradient(135deg, #F5E8E8 0%, #EDE0D8 100%); }
+
+.badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(192,97,122,0.35);
+}
+.card.featured .badge {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+  font-size: 14px;
+  padding: 4px 14px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 12px 14px 14px;
+  gap: 0;
+}
+.card-stars { display: flex; align-items: center; gap: 3px; }
+.star { font-size: 12px; line-height: 1; }
+.star.filled { color: var(--gold); }
+.star.empty  { color: rgba(192,97,122,0.18); }
+.rating-num {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+  margin-left: 3px;
+}
+.review-cnt { font-size: 10px; color: var(--text-sub); }
+
+.card-name {
+  font-family: var(--fn-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+  color: var(--text);
+  margin-top: 6px;
+}
+
+.card-price {
+  font-family: var(--fn-disp);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.card-btn {
+  display: block;
+  margin-top: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 0;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover .card-btn {
+  background: #A84D68;
+  box-shadow: 0 4px 16px rgba(192,97,122,0.3);
+}
+
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 28px 16px 56px;
+  font-style: italic;
+  font-family: var(--fn-disp);
+  font-size: 11px;
+  color: var(--text-sub);
+  opacity: 0.55;
+  letter-spacing: 0.04em;
+}
+
 </style>
 </head>
 <body>
-<header>
-  <h1>美容・スキンケア</h1>
-  <p class="sub">今日のおすすめ <span class="accent">8選</span> &nbsp;|&nbsp; 2026年05月25日更新</p>
-  <p class="sub">本ページはPRを含みます（楽天アフィリエイト）</p>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-eyebrow">Édition Beauté</p>
+    <h1 class="header-title">スキンケア厳選コレクション</h1>
+    <div class="header-divider">
+      <span></span><em>Selection</em><span></span>
+    </div>
+    <p class="header-meta"><span class="header-count">8</span>選 &nbsp;·&nbsp; 2026年05月25日更新</p>
+    <span class="pr-badge">PR &nbsp;/&nbsp; 楽天アフィリエイト</span>
+  </div>
 </header>
-<main>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00trnun.8w5kkabc.g00trnun.8uhxx9a1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flancome%2Fjp-lan-000329%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Flancome%2Fi%2F10000136%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/lancome/cabinet/12611101/12611109/13211177/imgrc0132842144.jpg?_ex=128x128" alt="【公式】LANCÔME(ランコム) ジェニフィック アルティメ セラム 30mL" loading="lazy">
-    <div class="info">
-      <p class="rank">#1</p>
-      <p class="name">【公式】LANCÔME(ランコム) ジェニフィック アルティメ セラム 30mL</p>
-      <p class="price">¥12,430</p>
-      <p class="stars">★4.8</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00rqjcn.8w5kk35b.g00rqjcn.8uhxx87e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fworld-good%2F4571436461011%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fworld-good%2Fi%2F10000058%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/world-good/cabinet/flick-1th/po_eye-cream.jpg?_ex=128x128" alt="【P10倍！】【13万本突破】アイクリーム 目元美容液 20g レチノール 美容" loading="lazy">
-    <div class="info">
-      <p class="rank">#2</p>
-      <p class="name">【P10倍！】【13万本突破】アイクリーム 目元美容液 20g レチノール 美容</p>
-      <p class="price">¥2,200</p>
-      <p class="stars">★3.93</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00uhkln.8w5kkaaa.g00uhkln.8uhxx1bc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecencia%2Fd0009%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fdecencia%2Fi%2F10000014%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/decencia/cabinet/prd/09/d0009_ranking.jpg?_ex=128x128" alt="【公式店】ディセンシア リンクルO／L コンセントレート 敏感肌用 しわ オイル" loading="lazy">
-    <div class="info">
-      <p class="rank">#3</p>
-      <p class="name">【公式店】ディセンシア リンクルO／L コンセントレート 敏感肌用 しわ オイル</p>
-      <p class="price">¥7,150</p>
-      <p class="stars">★4.51</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00r78wn.8w5kk1b5.g00r78wn.8uhxxd36/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmolti%2Fjj-02%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmolti%2Fi%2F10000013%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/molti/cabinet/main/main-r/25vr50jj.jpg?_ex=128x128" alt="美容液 ジュエリージェリー50g エイジングケア 導入美容液 導入液 導入 スキ" loading="lazy">
-    <div class="info">
-      <p class="rank">#4</p>
-      <p class="name">美容液 ジュエリージェリー50g エイジングケア 導入美容液 導入液 導入 スキ</p>
-      <p class="price">¥15,400</p>
-      <p class="stars">★4.64</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qjhin.8w5kk04e.g00qjhin.8uhxx4a8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmotebeauty%2Fsa-ebi-br-u-00035%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmotebeauty%2Fi%2F10000839%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/motebeauty/cabinet/i/2/545.jpg?_ex=128x128" alt="アミノローションPREMIUM　30日分1ヶ月お試しセット アミノ酸 高保湿 大" loading="lazy">
-    <div class="info">
-      <p class="rank">#5</p>
-      <p class="name">アミノローションPREMIUM　30日分1ヶ月お試しセット アミノ酸 高保湿 大</p>
-      <p class="price">¥1,100</p>
-      <p class="stars">★4.3</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00tna6n.8w5kk9a5.g00tna6n.8uhxx7e4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fattenir%2F116141%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fattenir%2Fi%2F10000557%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/attenir/cabinet/thum/thum/11614_voce_2512.jpg?_ex=128x128" alt="【ポイント10倍！5月23日20:00〜5月27日1:59】プライマーショット " loading="lazy">
-    <div class="info">
-      <p class="rank">#6</p>
-      <p class="name">【ポイント10倍！5月23日20:00〜5月27日1:59】プライマーショット </p>
-      <p class="price">¥3,740</p>
-      <p class="stars">★4.69</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qjupn.8w5kk8e6.g00qjupn.8uhxxd89/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmidorinomori%2F10000005%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmidorinomori%2Fi%2F10000005%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/midorinomori/cabinet/moist/imgrc0100139217.jpg?_ex=128x128" alt="緑の森ニューコンセプトゲル・ソリューション モイスト（保湿ゲル）普通〜乾燥肌/8" loading="lazy">
-    <div class="info">
-      <p class="rank">#7</p>
-      <p class="name">緑の森ニューコンセプトゲル・ソリューション モイスト（保湿ゲル）普通〜乾燥肌/8</p>
-      <p class="price">¥4,180</p>
-      <p class="stars">★4.47</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00tsqin.8w5kk74b.g00tsqin.8uhxx835/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffineday%2Fid-01%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ffineday%2Fi%2F10000003%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/fineday/cabinet/item/11847040/11904889/imgrc0102819196.jpg?_ex=128x128" alt="idio イディオ エクソソーム導入美容液 30ml ヒト幹細胞 リポソーム ナ" loading="lazy">
-    <div class="info">
-      <p class="rank">#8</p>
-      <p class="name">idio イディオ エクソソーム導入美容液 30ml ヒト幹細胞 リポソーム ナ</p>
-      <p class="price">¥3,980</p>
-      <p class="stars">★4.59</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
+
+<main class="grid">
+  <article class="card featured" style="animation-delay:0.00s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00trnun.8w5kkabc.g00trnun.8uhxx9a1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flancome%2Fjp-lan-000329%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Flancome%2Fi%2F10000136%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/lancome/cabinet/12611101/12611109/13211177/imgrc0132842144.jpg?_ex=128x128" alt="【公式】LANCÔME(ランコム) ジェニフィック アルティメ セラム 30mL" loading="lazy">
+        <span class="badge">No.1</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.8</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【公式】LANCÔME(ランコム) ジェニフィック アルティメ セラム 30mL</h2>
+        <div class="card-price">¥12,430</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.06s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00rqjcn.8w5kk35b.g00rqjcn.8uhxx87e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fworld-good%2F4571436461011%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fworld-good%2Fi%2F10000058%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/world-good/cabinet/flick-1th/po_eye-cream.jpg?_ex=128x128" alt="【P10倍！】【13万本突破】アイクリーム 目元美容液 20g レチノール 美容" loading="lazy">
+        <span class="badge">#2</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="rating-num">3.9</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【P10倍！】【13万本突破】アイクリーム 目元美容液 20g レチノール 美容</h2>
+        <div class="card-price">¥2,200</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.12s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00uhkln.8w5kkaaa.g00uhkln.8uhxx1bc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecencia%2Fd0009%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fdecencia%2Fi%2F10000014%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/decencia/cabinet/prd/09/d0009_ranking.jpg?_ex=128x128" alt="【公式店】ディセンシア リンクルO／L コンセントレート 敏感肌用 しわ オイル" loading="lazy">
+        <span class="badge">#3</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.5</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【公式店】ディセンシア リンクルO／L コンセントレート 敏感肌用 しわ オイル</h2>
+        <div class="card-price">¥7,150</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.18s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00r78wn.8w5kk1b5.g00r78wn.8uhxxd36/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmolti%2Fjj-02%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmolti%2Fi%2F10000013%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/molti/cabinet/main/main-r/25vr50jj.jpg?_ex=128x128" alt="美容液 ジュエリージェリー50g エイジングケア 導入美容液 導入液 導入 スキ" loading="lazy">
+        <span class="badge">#4</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.6</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">美容液 ジュエリージェリー50g エイジングケア 導入美容液 導入液 導入 スキ</h2>
+        <div class="card-price">¥15,400</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.24s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00qjhin.8w5kk04e.g00qjhin.8uhxx4a8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmotebeauty%2Fsa-ebi-br-u-00035%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmotebeauty%2Fi%2F10000839%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/motebeauty/cabinet/i/2/545.jpg?_ex=128x128" alt="アミノローションPREMIUM　30日分1ヶ月お試しセット アミノ酸 高保湿 大" loading="lazy">
+        <span class="badge">#5</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.3</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">アミノローションPREMIUM　30日分1ヶ月お試しセット アミノ酸 高保湿 大</h2>
+        <div class="card-price">¥1,100</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.30s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00tna6n.8w5kk9a5.g00tna6n.8uhxx7e4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fattenir%2F116141%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fattenir%2Fi%2F10000557%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/attenir/cabinet/thum/thum/11614_voce_2512.jpg?_ex=128x128" alt="【ポイント10倍！5月23日20:00〜5月27日1:59】プライマーショット" loading="lazy">
+        <span class="badge">#6</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.7</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【ポイント10倍！5月23日20:00〜5月27日1:59】プライマーショット</h2>
+        <div class="card-price">¥3,740</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.36s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00qjupn.8w5kk8e6.g00qjupn.8uhxxd89/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmidorinomori%2F10000005%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmidorinomori%2Fi%2F10000005%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/midorinomori/cabinet/moist/imgrc0100139217.jpg?_ex=128x128" alt="緑の森ニューコンセプトゲル・ソリューション モイスト（保湿ゲル）普通〜乾燥肌/8" loading="lazy">
+        <span class="badge">#7</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.5</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">緑の森ニューコンセプトゲル・ソリューション モイスト（保湿ゲル）普通〜乾燥肌/8</h2>
+        <div class="card-price">¥4,180</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.42s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00tsqin.8w5kk74b.g00tsqin.8uhxx835/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffineday%2Fid-01%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ffineday%2Fi%2F10000003%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/fineday/cabinet/item/11847040/11904889/imgrc0102819196.jpg?_ex=128x128" alt="idio イディオ エクソソーム導入美容液 30ml ヒト幹細胞 リポソーム ナ" loading="lazy">
+        <span class="badge">#8</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.6</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">idio イディオ エクソソーム導入美容液 30ml ヒト幹細胞 リポソーム ナ</h2>
+        <div class="card-price">¥3,980</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
 </main>
-<footer>楽天アフィリエイト | PR含む</footer>
+
+<footer class="site-footer">
+  <p>© sakura_cosme_lab &nbsp;—&nbsp; 楽天アフィリエイト参加中 &nbsp;/&nbsp; 本ページはPRを含みます</p>
+</footer>
 </body>
 </html>
