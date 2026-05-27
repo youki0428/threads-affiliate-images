@@ -2,116 +2,444 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F7F2EC">
 <title>美容・スキンケア | おすすめ商品</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#FAFAFA;color:#333333;font-family:-apple-system,'Hiragino Sans',sans-serif}
-header{background:#FFF0EE;padding:20px 16px;text-align:center;border-bottom:3px solid #E8A4B8}
-header h1{font-size:20px;font-weight:700}
-.sub{font-size:12px;opacity:.65;margin-top:5px}
-.accent{color:#E8A4B8}
-main{padding:12px;max-width:520px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #F0D8D0;border-radius:14px;overflow:hidden;text-decoration:none;color:#333333;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
-.card:active{opacity:.6}
-.card img,.no-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#F0D8D0}
-.info{flex:1;display:flex;flex-direction:column;padding:9px 10px 10px}
-.rank{font-size:10px;color:#E8A4B8;font-weight:700;margin-bottom:3px}
-.name{font-size:12px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-.price{font-size:13px;font-weight:700;color:#C0617A;margin-top:6px}
-.stars{font-size:10px;opacity:.65;margin-top:2px}
-.btn{display:block;margin-top:8px;background:#E8A4B8;color:#FFFFFF;font-size:11px;font-weight:700;padding:6px 0;border-radius:20px;text-align:center}
-footer{text-align:center;font-size:11px;opacity:.4;padding:28px 16px 40px}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #F7F2EC;
+  --surface:    #FFFFFF;
+  --text:       #1E1517;
+  --text-sub:   #8A6A72;
+  --accent:     #C0617A;
+  --gold:       #BFA07A;
+  --border:     rgba(192,97,122,0.14);
+  --shadow:     0 2px 18px rgba(60,20,30,0.07);
+  --shadow-h:   0 12px 44px rgba(192,97,122,0.18);
+  --radius:     18px;
+  --fn-disp:    'Cormorant Garamond', 'Noto Serif JP', Georgia, serif;
+  --fn-body:    'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(192,97,122,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 80% 100%, rgba(191,160,122,0.06) 0%, transparent 60%);
+  color: var(--text);
+  font-family: var(--fn-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.site-header {
+  background: linear-gradient(155deg, #FFF8F3 0%, #FEF0EC 50%, #FAE8EA 100%);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 52px 24px 44px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 110%,
+    rgba(192,97,122,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 280px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192,97,122,0.5), transparent);
+}
+
+.header-inner { position: relative; }
+.header-eyebrow {
+  display: inline-block;
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  opacity: 0.75;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.header-title {
+  font-family: var(--fn-disp);
+  font-size: clamp(30px, 6.5vw, 56px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px auto 16px;
+}
+.header-divider span {
+  width: 48px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+  opacity: 0.4;
+}
+.header-divider span:last-child {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.header-divider em {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+.header-meta {
+  font-size: 12px;
+  color: var(--text-sub);
+  letter-spacing: 0.03em;
+}
+.header-count {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+}
+.pr-badge {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  color: var(--text-sub);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 24px 14px 36px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 32px 22px 44px;
+  }
+}
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    padding: 40px 32px 56px;
+  }
+}
+
+/* ── Featured (#1) ── */
+.card.featured { grid-column: 1 / -1; }
+@media (min-width: 600px) {
+  .card.featured { grid-column: span 2; }
+  .card.featured .card-link { flex-direction: row; }
+  .card.featured .card-img-wrap { width: 45%; flex-shrink: 0; }
+  .card.featured .card-img-wrap img,
+  .card.featured .card-img-wrap .no-img { aspect-ratio: 4/3; }
+  .card.featured .card-body { padding: 30px 30px 26px; justify-content: center; }
+  .card.featured .card-name { font-size: 16px; -webkit-line-clamp: 3; margin-top: 6px; }
+  .card.featured .card-price { font-size: 32px; }
+  .card.featured .card-btn { max-width: 220px; padding: 10px 0; font-size: 12px; }
+}
+
+/* ── Card ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.28s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-h);
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #F5ECE8;
+}
+.card-img-wrap img, .no-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #F0E8E4;
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.card:hover .card-img-wrap img { transform: scale(1.07); }
+.no-img { background: linear-gradient(135deg, #F5E8E8 0%, #EDE0D8 100%); }
+
+.badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(192,97,122,0.35);
+}
+.card.featured .badge {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+  font-size: 14px;
+  padding: 4px 14px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 12px 14px 14px;
+  gap: 0;
+}
+.card-stars { display: flex; align-items: center; gap: 3px; }
+.star { font-size: 12px; line-height: 1; }
+.star.filled { color: var(--gold); }
+.star.empty  { color: rgba(192,97,122,0.18); }
+.rating-num {
+  font-family: var(--fn-disp);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+  margin-left: 3px;
+}
+.review-cnt { font-size: 10px; color: var(--text-sub); }
+
+.card-name {
+  font-family: var(--fn-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+  color: var(--text);
+  margin-top: 6px;
+}
+
+.card-price {
+  font-family: var(--fn-disp);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.card-btn {
+  display: block;
+  margin-top: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 0;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover .card-btn {
+  background: #A84D68;
+  box-shadow: 0 4px 16px rgba(192,97,122,0.3);
+}
+
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 28px 16px 56px;
+  font-style: italic;
+  font-family: var(--fn-disp);
+  font-size: 11px;
+  color: var(--text-sub);
+  opacity: 0.55;
+  letter-spacing: 0.04em;
+}
+
 </style>
 </head>
 <body>
-<header>
-  <h1>美容・スキンケア</h1>
-  <p class="sub">今日のおすすめ <span class="accent">8選</span> &nbsp;|&nbsp; 2026年05月26日更新</p>
-  <p class="sub">本ページはPRを含みます（楽天アフィリエイト）</p>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-eyebrow">Édition Beauté</p>
+    <h1 class="header-title">美容・スキンケア</h1>
+    <div class="header-divider">
+      <span></span><em>Selection</em><span></span>
+    </div>
+    <p class="header-meta"><span class="header-count">8</span>選 &nbsp;·&nbsp; 2026年05月27日更新</p>
+    <span class="pr-badge">PR &nbsp;/&nbsp; 楽天アフィリエイト</span>
+  </div>
 </header>
-<main>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qdaen.8w5kkaa0.g00qdaen.8uhxx68d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flesthemo%2Fg500%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Flesthemo%2Fi%2F10000001%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/lesthemo/cabinet/shg/gel500set_03_6980y.jpg?_ex=128x128" alt="7500円→6980円 送料無料 レステモ 美白 ゲルクリーム シルク姉愛用 5" loading="lazy">
-    <div class="info">
-      <p class="rank">#1</p>
-      <p class="name">7500円→6980円 送料無料 レステモ 美白 ゲルクリーム シルク姉愛用 5</p>
-      <p class="price">¥6,980</p>
-      <p class="stars">★4.55</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qdaen.8w5kkaa0.g00qdaen.8uhxx68d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flesthemo%2Fgcr%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Flesthemo%2Fi%2F10000002%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/lesthemo/cabinet/shg/gel500ref_03.jpg?_ex=128x128" alt="オールインワン 美白 ゲルクリーム 詰め替え 大容量 500g レステモ オール" loading="lazy">
-    <div class="info">
-      <p class="rank">#2</p>
-      <p class="name">オールインワン 美白 ゲルクリーム 詰め替え 大容量 500g レステモ オール</p>
-      <p class="price">¥6,700</p>
-      <p class="stars">★4.72</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00rxi6n.8w5kk7f8.g00rxi6n.8uhxx424/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frenngekesyousui%2F10000002%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Frenngekesyousui%2Fi%2F10000002%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/renngekesyousui/cabinet/eg/thumb/renge_thumb1.jpg?_ex=128x128" alt="れんげ化粧水 140cc 生レモン果汁の化粧水 素肌を育てるシンプルケア 100" loading="lazy">
-    <div class="info">
-      <p class="rank">#3</p>
-      <p class="name">れんげ化粧水 140cc 生レモン果汁の化粧水 素肌を育てるシンプルケア 100</p>
-      <p class="price">¥1,200</p>
-      <p class="stars">★4.74</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qdaen.8w5kkaa0.g00qdaen.8uhxx68d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flesthemo%2Fy-g90%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Flesthemo%2Fi%2F10000006%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/lesthemo/cabinet/shg/gel90_3500px_23_p20.jpg?_ex=128x128" alt="【 乾燥肌、シミ、美白 】美白ゲルクリーム 90g レステモ 送料無料 美白オー" loading="lazy">
-    <div class="info">
-      <p class="rank">#4</p>
-      <p class="name">【 乾燥肌、シミ、美白 】美白ゲルクリーム 90g レステモ 送料無料 美白オー</p>
-      <p class="price">¥1,940</p>
-      <p class="stars">★4.5</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00qvgnn.8w5kk628.g00qvgnn.8uhxx1e4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogaland-life-essence%2Fone-yoyaku%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fogaland-life-essence%2Fi%2F10000255%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/ogaland-life-essence/cabinet/item/09810993/13015850/260227_ogt_r.jpg?_ex=128x128" alt="オールインワンゲル One ( 100g ) チューブ タイプ 保湿 潤う 乾燥" loading="lazy">
-    <div class="info">
-      <p class="rank">#5</p>
-      <p class="name">オールインワンゲル One ( 100g ) チューブ タイプ 保湿 潤う 乾燥</p>
-      <p class="price">¥2,200</p>
-      <p class="stars">★4.45</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00tsqin.8w5kk74b.g00tsqin.8uhxx835/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffineday%2Fid-03%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ffineday%2Fi%2F10000004%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/fineday/cabinet/item/11847040/11886193/imgrc0100946506.jpg?_ex=128x128" alt="idio イディオ 北海道PDRN ローション 母の日 ギフト 化粧水 高保湿 " loading="lazy">
-    <div class="info">
-      <p class="rank">#6</p>
-      <p class="name">idio イディオ 北海道PDRN ローション 母の日 ギフト 化粧水 高保湿 </p>
-      <p class="price">¥2,780</p>
-      <p class="stars">★4.64</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00ptgvn.8w5kk5f8.g00ptgvn.8uhxx800/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmahou-soap%2Fgetto-izumi500%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmahou-soap%2Fi%2F10000235%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mahou-soap/cabinet/gettou/izumi_lotion/product/500.jpg?_ex=128x128" alt="化粧水 オーガニック 月桃の泉 500ml 2本組 無添加 アルコールフリー 沖" loading="lazy">
-    <div class="info">
-      <p class="rank">#7</p>
-      <p class="name">化粧水 オーガニック 月桃の泉 500ml 2本組 無添加 アルコールフリー 沖</p>
-      <p class="price">¥10,044</p>
-      <p class="stars">★4.59</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
-  <a href="https://hb.afl.rakuten.co.jp/hgc/g00sms5n.8w5kk39a.g00sms5n.8uhxx73e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffancl-shop%2F3771-11%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ffancl-shop%2Fi%2F10000036%2F&amp;rafcid=wsc_i_is_fa2cea45-94cc-4259-bb56-993629f227d9" class="card" target="_blank" rel="noopener noreferrer">
-    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/fancl-shop/cabinet/item-img/3500-3999/3771-11c.jpg?_ex=128x128" alt="アクネケア 化粧液＜医薬部外品＞【ファンケル 公式】 [FANCL 化粧水 化粧" loading="lazy">
-    <div class="info">
-      <p class="rank">#8</p>
-      <p class="name">アクネケア 化粧液＜医薬部外品＞【ファンケル 公式】 [FANCL 化粧水 化粧</p>
-      <p class="price">¥1,650</p>
-      <p class="stars">★4.51</p>
-      <span class="btn">楽天で見る</span>
-    </div>
-  </a>
+
+<main class="grid">
+  <article class="card featured" style="animation-delay:0.00s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00pyapn.8w5kk59d.g00pyapn.8uhxxe7f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgalleria%2F600585%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/galleria/cabinet/porter-t7/600585.jpg?_ex=600x600" alt="ポーター テンション 2WAYブリーフケース 627-17503 ビジネスバッグ 吉田カバン P" loading="lazy">
+        <span class="badge">No.1</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.8</span><span class="review-cnt">(556件)</span></div>
+        <h2 class="card-name">ポーター テンション 2WAYブリーフケース 627-17503 ビジネスバッグ 吉田カバン P</h2>
+        <div class="card-price">¥47,300</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.06s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00u48xn.8w5kk5be.g00u48xn.8uhxxeca/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsnnm-shop%2Fbag-c-092203%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/snnm-shop/cabinet/12846559/imgrc0123457504.jpg?_ex=600x600" alt="osakaharu ロンシャン フェイラー バッグインバッグ バックインバック インナーバッグ " loading="lazy">
+        <span class="badge">#2</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.7</span><span class="review-cnt">(1,469件)</span></div>
+        <h2 class="card-name">osakaharu ロンシャン フェイラー バッグインバッグ バックインバック インナーバッグ </h2>
+        <div class="card-price">¥1,980</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.12s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00ubdbn.8w5kk491.g00ubdbn.8uhxxedb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Famvel%2Fa2755%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/amvel/cabinet/shohin/a2755new/a2755_1_thumbnail.jpg?_ex=600x600" alt="VERYKAL LARGE Flat／世界最軽量級 ワンタッチ 遮光100 自動開閉 折りたたみ" loading="lazy">
+        <span class="badge">#3</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.3</span><span class="review-cnt">(74件)</span></div>
+        <h2 class="card-name">VERYKAL LARGE Flat／世界最軽量級 ワンタッチ 遮光100 自動開閉 折りたたみ</h2>
+        <div class="card-price">¥7,700</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.18s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00s6xvn.8w5kk83b.g00s6xvn.8uhxx858/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frareleak%2F549-082h%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/rareleak/cabinet/bag/12723851/000.jpg?_ex=600x600" alt="＼クーポン利用で3,180円／濡れた傘もそのままOK!ボディバッグ ペットボトル 防水ポケット " loading="lazy">
+        <span class="badge">#4</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="rating-num">4.7</span><span class="review-cnt">(64件)</span></div>
+        <h2 class="card-name">＼クーポン利用で3,180円／濡れた傘もそのままOK!ボディバッグ ペットボトル 防水ポケット </h2>
+        <div class="card-price">¥3,980</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.24s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00t7k4n.8w5kk604.g00t7k4n.8uhxx7df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Funby%2Fcc-28961%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/unby/cabinet/09505404/imgrc0095893923.jpg?_ex=600x600" alt="【公式】cote&amp;ciel コートエシエル ISAR AIR EcoYarn Black | L" loading="lazy">
+        <span class="badge">#5</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="rating-num">0.0</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">【公式】cote&amp;ciel コートエシエル ISAR AIR EcoYarn Black | L</h2>
+        <div class="card-price">¥51,700</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.30s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00qbuhn.8w5kk36a.g00qbuhn.8uhxxf3a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flaglagmarket%2F10021235%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/laglagmarket/cabinet/image159/10021235-1.jpg?_ex=600x600" alt="マッキントッシュ バックパック ナイロン ラップトップバックパック リュック MACKINTOS" loading="lazy">
+        <span class="badge">#6</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="rating-num">0.0</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">マッキントッシュ バックパック ナイロン ラップトップバックパック リュック MACKINTOS</h2>
+        <div class="card-price">¥53,900</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.36s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00r589n.8w5kk3b4.g00r589n.8uhxx3b5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-marks-run%2F360125487%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/auc-marks-run/cabinet/suruzou_431/360125487_1.jpg?_ex=600x600" alt="Jimmy Choo ジミーチュウ ボディバッグ FINSLEY EMG OAJ フィンスリー " loading="lazy">
+        <span class="badge">#7</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="rating-num">3.5</span><span class="review-cnt">(2件)</span></div>
+        <h2 class="card-name">Jimmy Choo ジミーチュウ ボディバッグ FINSLEY EMG OAJ フィンスリー </h2>
+        <div class="card-price">¥109,900</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
+  <article class="card" style="animation-delay:0.42s">
+    <a href="https://hb.afl.rakuten.co.jp/hgc/g00rf71n.8w5kk941.g00rf71n.8uhxx28e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fstylife%2Fmp7795%2F&amp;rafcid=wsc_i_ra_fa2cea45-94cc-4259-bb56-993629f227d9" target="_blank" rel="noopener noreferrer sponsored" class="card-link">
+      <div class="card-img-wrap">
+        <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/stylife/cabinet/item/795/mp7795-01_1.jpg?_ex=600x600" alt="TUMI 【TUMI 公式店】JARVIS ノース・サウス・トート トゥミ バッグ トートバッグ" loading="lazy">
+        <span class="badge">#8</span>
+      </div>
+      <div class="card-body">
+        <div class="card-stars"><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="rating-num">0.0</span><span class="review-cnt">(0件)</span></div>
+        <h2 class="card-name">TUMI 【TUMI 公式店】JARVIS ノース・サウス・トート トゥミ バッグ トートバッグ</h2>
+        <div class="card-price">¥110,000</div>
+        <span class="card-btn">楽天で見る</span>
+      </div>
+    </a>
+  </article>
 </main>
-<footer>楽天アフィリエイト | PR含む</footer>
+
+<footer class="site-footer">
+  <p>© sakura_cosme_lab &nbsp;—&nbsp; 楽天アフィリエイト参加中 &nbsp;/&nbsp; 本ページはPRを含みます</p>
+</footer>
 </body>
 </html>
